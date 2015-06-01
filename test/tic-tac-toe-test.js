@@ -58,9 +58,15 @@ describe('tic-tac-toe engine tests', function () {
         assert.equal(board[4], 'X', 'expected player move in the center');
         
         // There should be exactly one O and one X in the board.
-        assert.equal(_.reduce(board, function(memo, cell){ return cell == 'O' ? 1 : 0; }, 0),
+        assert.equal(_.reduce(board, 
+                              function(memo, cell){ 
+                                return cell == 'O' ? memo + 1 : memo; 
+                              }, 0),
                     1);
-        assert.equal(_.reduce(board, function(memo, cell){ return cell == 'X' ? 1 : 0; }, 0),
+        assert.equal(_.reduce(board, 
+                              function(memo, cell){
+                                return cell == 'X' ? memo + 1 : memo; 
+                              }, 0),
                     1);
     });
 
