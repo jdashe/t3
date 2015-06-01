@@ -6,8 +6,7 @@ var rl = readline.createInterface({
     output: process.stdout
     });
 
-var game = new T3();
-game.newGame(4);
+var game = new T3(); // defaults to intermediate player.
 
 rl.setPrompt('What\'s your move? ');
 
@@ -24,15 +23,18 @@ function printBoard(b) {
     console.log('%s|%s|%s', spacy(b,0), spacy(b,1), spacy(b,2));
 }
 
+console.log("Initial state: %j\n", game.getState());
 printBoard(game.getBoard());
 rl.prompt();
 
 rl.on('line', function(line) {
     game.playerMove(Number(line.trim()));
+    console.log("Latest state: %j\n", game.getState());
     printBoard(game.getBoard());
     
     if (game.getWinner() != '') {
         console.log("Result of game: " + game.getWinner());
+        console.log("Last state: %j\n", game.getState());
         process.exit(0);
     }
     
