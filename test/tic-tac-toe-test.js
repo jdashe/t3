@@ -44,15 +44,24 @@ describe('tic-tac-toe engine tests', function () {
         assert.equal(gameState.state, 0, 'expected initial state to be 0');
         
         assert.isDefined(gameState.turn);
-        assert.equal(gameState.turn, -1, 'expected initial turn to be the human');
-        
+        assert.equal(gameState.turn, 1, 'expected initial turn to be the human');
     });
 
-    it('initial game', function() {
+    it('game play of one move', function() {
         var game = new T3();
         game.newGame();
         
-        // 
+        // First move. Let's go in the center.
+        game.playerMove(4);
+        assert.equal(game.getWinner(), '', 'no winner yet');
+        var board = game.getBoard();
+        assert.equal(board[4], 'X', 'expected player move in the center');
+        
+        // There should be exactly one O and one X in the board.
+        assert.equal(_.reduce(board, function(memo, cell){ return cell == 'O' ? 1 : 0; }, 0),
+                    1);
+        assert.equal(_.reduce(board, function(memo, cell){ return cell == 'X' ? 1 : 0; }, 0),
+                    1);
     });
 
 });
